@@ -13,7 +13,7 @@ public class AppController {
     @GetMapping
     public String get() {
         LOGGER.info(String.format("app.current-id:%d",
-                           ApplicationHelper.getPropertyAppCurrentId()));
+                              ApplicationHelper.getPropertyAppNextId()));
         return "sample";
     }
 }

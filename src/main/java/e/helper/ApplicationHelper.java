@@ -25,4 +25,8 @@ public class ApplicationHelper {
     public static int getPropertyAppCurrentId() {
         return AppGenerator.get();
     }
+    
+    public static int getPropertyAppNextId() {
+        return AppGenerator.generate();
+    }
 }
