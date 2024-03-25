@@ -6,4 +6,7 @@ public class MultiRequestableOnceExecutor implements Executor {
     @Override
     public void execute(Runnable command) {
     }
+    
+    public void request() {
+    }
 }
