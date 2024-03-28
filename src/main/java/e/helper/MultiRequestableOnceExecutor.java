@@ -17,5 +17,6 @@ public class MultiRequestableOnceExecutor implements Executor {
     }
     
     public void request() {
+        this.execute(this.command);
     }
 }
