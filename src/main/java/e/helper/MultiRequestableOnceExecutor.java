@@ -12,7 +12,12 @@ public class MultiRequestableOnceExecutor implements Executor {
     
     @Override
     public void execute(Runnable command) {
-        this.thread = new Thread() {};
+        this.thread = new Thread() {
+                    @Override
+                    public void run() {
+                        command.run();
+                    }
+                };
         this.thread.start();
     }
     
