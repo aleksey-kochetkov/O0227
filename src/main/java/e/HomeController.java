@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import e.helper.ApplicationHelper;
 
 @Controller
-public class AppController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AppController.class);
+public class HomeController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
     
     @GetMapping
     public String get() {

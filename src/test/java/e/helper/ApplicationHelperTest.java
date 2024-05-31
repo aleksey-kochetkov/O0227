@@ -2,12 +2,23 @@ package e.helper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static e.helper.Assertions.assertHigher;
 
 @SpringBootTest
 public class ApplicationHelperTest {
+    @Autowired
+    private ApplicationContext ctx;
+    
     @Test
     void whenGetPropertyAppNextId() {
         int expected = ApplicationHelper.getPropertyAppCurrentId();
-        Assertions.assertHigher(expected, ApplicationHelper.getPropertyAppNextId());
+        int actual = ApplicationHelper.getPropertyAppNextId();
+        assertHigher(expected, actual);
+        expected = actual;
+        ApplicationHelper.init(this.ctx);
+        assertEquals(expected, ApplicationHelper.getPropertyAppCurrentId());
     }
 }
