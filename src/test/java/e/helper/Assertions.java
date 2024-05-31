@@ -12,31 +12,52 @@ public class Assertions {
 
     static void assertEquals(BigDecimal expected, BigDecimal actual, String message) {
         if (expected == null ? actual != null : actual == null || expected.compareTo(actual) != 0) {
-            failNotEqual(expected, actual, message);
+            failNotEqual(expected, actual, message, 0);
         }
     }
 
-    static void failNotEqual(Object expected, Object actual, String message) {
-        fail(() -> format(expected, actual, message));
+    public static void assertHigher(int expected, int actual) {
+        assertHigher(expected, actual, (String)null);
+    }
+    
+    static void assertHigher(int expected, int actual, String message) {
+        if (!(expected < actual)) {
+            failNotEqual(expected, actual, message, 1);
+        }
     }
 
-    static String format(Object expected, Object actual, String message) {
-        return buildPrefix(message) + formatValues(expected, actual);
+    static void failNotEqual(Object expected, Object actual, String message, int mode) {
+        fail(() -> format(expected, actual, message, mode));
     }
 
-    static String formatValues(Object expected, Object actual) {
-        String expectedString = Objects.toString(expected);
-        String actualString = Objects.toString(actual);
-        if (expectedString.equals(actualString)) {
+    static String format(Object expected, Object actual, String message, int mode) {
+        return buildPrefix(message) + formatValues(expected, actual, mode);
+    }
+
+    static String buildPrefix(String message) {
+//        return (StringUtils.isNotBlank(message) ? message + " ==> " : "");
+        return "";
+    }
+
+    static String formatValues(Object expected, Object actual, int mode) {
+        String expectedString = toString(expected);
+        String actualString = toString(actual);
+        if (mode == 0 && expectedString.equals(actualString)) {
             return String.format("expected: %s but was: %s", formatClassAndValue(expected, expectedString),
                     formatClassAndValue(actual, actualString));
         }
         return String.format("expected: <%s> but was: <%s>", expectedString, actualString);
     }
 
-    static String buildPrefix(String message) {
-//        return (StringUtils.isNotBlank(message) ? message + " ==> " : "");
-        return "";
+    private static String toString(Object obj) {
+        if (obj instanceof Class) {
+            return getCanonicalName((Class<?>) obj);
+        }
+        return nullSafeToString(obj);
+    }
+    
+    private static String nullSafeToString(Object obj) {
+        return obj.toString();
     }
 
     private static String formatClassAndValue(Object value, String valueString) {

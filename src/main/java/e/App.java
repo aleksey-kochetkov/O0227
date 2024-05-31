@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 
 @SpringBootApplication
 public class App implements CommandLineRunner {
-    public static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
         SpringApplication.run(App.class);
