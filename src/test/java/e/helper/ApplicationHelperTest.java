@@ -14,6 +14,8 @@ public class ApplicationHelperTest {
     
     @Test
     void whenGetPropertyAppNextId() {
+        System.setProperty("app.store-executor-sleep", "0");
+        ApplicationHelper.init(this.ctx);
         int expected = ApplicationHelper.getPropertyAppCurrentId();
         int actual = ApplicationHelper.getPropertyAppNextId();
         assertHigher(expected, actual);
