@@ -17,6 +17,7 @@ public class ApplicationHelper {
     private static final String NAME = isTest() ? "O0227test.properties" : "O0227.properties";
     private static final MultiRequestableOnceExecutor STORE_EXECUTOR =
           new MultiRequestableOnceExecutor(ApplicationHelper::storeFile);
+//    private static String appCommand;
     private static Integer tmp;
     private static Integer storeExecutorSleep;
 
@@ -96,6 +97,14 @@ public class ApplicationHelper {
             }
         }
     }
+
+//    public static void parseArgs(String[] args) {
+//        if (args.length == 0) {
+//            System.out.println("usage: mock|qty");
+//            System.exit(0);
+//        }
+//        appCommand = args[0];
+//    }
 
     public static void sleep(long millis) {
         try {
